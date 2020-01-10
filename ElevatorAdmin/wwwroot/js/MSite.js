@@ -1,6 +1,18 @@
 ﻿
+$(function () {
+
+    $('[name="returnURL"]').attr("value", window.location);
+
+    $('[name="selectedRoleId"]').on("change", function () {
+
+        $('[name="changeRoleForm"]').submit();
+
+    });
+
+});
 
 
+//================================================================================
 // Read a page's GET URL variables and return them as an associative array.
 function getUrlVars() {
     var vars = [], hash;

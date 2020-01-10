@@ -104,8 +104,17 @@ namespace ElevatorAdmin.Controllers
             var claim = (identity).FindFirst("selectedRoleId");
             identity.RemoveClaim(claim);
             identity.AddClaim(new Claim("selectedRoleId", selectedRoleId.ToString()));
-            await _signInManager.SignOutAsync();
-            await _signInManager.SignInAsync(user, false, null);
+            await _userManager.AddClaimAsync(user, new Claim("selectedRoleId", selectedRoleId.ToString()));
+            await _signInManager.RefreshSignInAsync(user);
+
+
+            //var user = _userRepository.Table.FirstOrDefault(a => a.Id == this.UserId);
+            //ClaimsIdentity identity = (ClaimsIdentity)User.Identity;
+            //var claim = (identity).FindFirst("selectedRoleId");
+            //identity.RemoveClaim(claim);
+            //identity.AddClaim(new Claim("selectedRoleId", selectedRoleId.ToString()));
+            //await _signInManager.SignOutAsync();
+            //await _signInManager.SignInAsync(user, false, null);
             return Redirect(returnURL);
         }
     }

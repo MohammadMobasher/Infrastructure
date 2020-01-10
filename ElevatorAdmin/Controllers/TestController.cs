@@ -25,6 +25,7 @@ namespace ElevatorAdmin.Controllers
         private readonly TestRoutinRepository _testRoutinRepository;
         private readonly mohammadTestRepository _mohammadTestRepository;
         private readonly UserRepository _userRepository;
+        private readonly UserManager<Users> _userManager;
         private readonly SignInManager<Users> _signInManager;
 
         public TestController(UsersAccessRepository usersAccessRepository,
@@ -32,12 +33,14 @@ namespace ElevatorAdmin.Controllers
             Routine2RoleDashboardRepository routine2RoleDashboardRepository,
             mohammadTestRepository mohammadTestRepository,
             UserRepository userRepository,
+            UserManager<Users> userManager,
             SignInManager<Users> signInManager
             ) : base(usersAccessRepository, routine2RoleDashboardRepository)
         {
             _testRoutinRepository = testRoutinRepository;
             _mohammadTestRepository = mohammadTestRepository;
             _userRepository = userRepository;
+            _userManager = userManager;
             _signInManager = signInManager;
             HasRoutine = true;
         }
@@ -51,16 +54,20 @@ namespace ElevatorAdmin.Controllers
             var claim = (identity).FindFirst("selectedRoleId");
             identity.RemoveClaim(claim);
             identity.AddClaim(new Claim("selectedRoleId", 14.ToString()));
+            await _userManager.AddClaimAsync(user, new Claim("selectedRoleId", 14.ToString()));
+
+            //identity.RemoveClaim(claim);
+            //identity.AddClaim(new Claim("selectedRoleId", 14.ToString()));
             //await _signInManager.RefreshSignInAsync(user);
             //await _signInManager.SignOutAsync();
             //await _signInManager.SignInAsync(user, false, null);
-            var claimsPrincipal = await _signInManager.CreateUserPrincipalAsync(user);
+            //var claimsPrincipal = await _signInManager.CreateUserPrincipalAsync(user);
 
-            ClaimsIdentity identity1 = (ClaimsIdentity)claimsPrincipal.Identity;
-            var claim1 = (identity1).FindFirst("selectedRoleId");
-            identity1.RemoveClaim(claim1);
-            identity1.AddClaim(new Claim("selectedRoleId", 14.ToString()));
-
+            //ClaimsIdentity identity1 = (ClaimsIdentity)claimsPrincipal.Identity;
+            //var claim1 = (identity1).FindFirst("selectedRoleId");
+            //identity1.RemoveClaim(claim1);
+            //identity1.AddClaim(new Claim("selectedRoleId", 14.ToString()));
+    
             await _signInManager.RefreshSignInAsync(user);
             //var ddd = claimsPrincipal.Identities.FirstOrDefault().Claims.Where(x => x.Type == "selectedRoleId").SingleOrDefault();
 

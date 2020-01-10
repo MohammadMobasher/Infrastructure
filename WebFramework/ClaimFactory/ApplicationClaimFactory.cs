@@ -15,7 +15,7 @@ namespace WebFramework.ClaimFactory
 {
     public class ApplicationClaimFactory : UserClaimsPrincipalFactory<Users, Roles>
     {
-
+        private readonly UserManager<Users> _userManager;
         private readonly UsersRoleRepository _usersRoleRepository;
 
         public ApplicationClaimFactory(UserManager<Users> userManager, 
@@ -23,6 +23,7 @@ namespace WebFramework.ClaimFactory
             IOptions<IdentityOptions> options,
             UsersRoleRepository usersRoleRepository) : base(userManager, roleManager, options)
         {
+            _userManager = userManager;
             _usersRoleRepository = usersRoleRepository;
         }
 
@@ -33,6 +34,20 @@ namespace WebFramework.ClaimFactory
             var principal = await base.CreateAsync(user);
             
             List<UserRoleDetailDTO> Roles = await _usersRoleRepository.GetRolesByUserIdAsync(user.Id);
+            var LastClaim = await _userManager.GetClaimsAsync(user);
+
+            string selectedRoleId = "-1";
+            if(LastClaim.Count > 0)
+            {
+                selectedRoleId = LastClaim.FirstOrDefault(x => x.Type == "selectedRoleId").Value;
+                await _userManager.RemoveClaimAsync(user, new Claim("selectedRoleId", selectedRoleId));
+            }
+            else
+            {
+                selectedRoleId = Roles != null ? Roles.First().RoleId + "" : "-1";
+                
+            }
+
 
             ((ClaimsIdentity)principal.Identity).AddClaims(new[]
             {
@@ -41,8 +56,8 @@ namespace WebFramework.ClaimFactory
                  new Claim("LastName",  user.LastName ?? ""),
                  new Claim("FullName",  user.FirstName + " " + user.LastName),
                  new Claim("UserProfile" , user.ProfilePic ?? "/Uploads/UserImage/NoPhoto.jpg"),
-
-                 new Claim("selectedRoleId", Roles != null ? Roles.First().RoleId + "" : "-1"),
+                 //new Claim("selectedRoleId", Roles != null ? Roles.First().RoleId + "" : "-1"),
+                 new Claim("selectedRoleId", selectedRoleId),
                  new Claim("UserHasRoles", JsonConvert.SerializeObject(Roles, Formatting.Indented))
 
 

@@ -200,19 +200,24 @@
                         <h4 class="page-title " style="float:right">@ViewData["Title"]</h4>
 
                         <div style="float:left;height: 57px;padding-top: 10px;">
-                            <select class="form-control" name="selectedRole">
-                                @foreach (UserRoleDetailDTO item in ViewBag.UserHasRoles)
-                                {
-                                    if (ViewBag.selectedRoleId == item.RoleId)
+                            <form name="changeRoleForm" asp-action="changeSelectedRole" asp-controller="Account">
+
+                                <input type="hidden" name="returnURL" />
+
+                                <select class="form-control" name="selectedRoleId">
+                                    @foreach (UserRoleDetailDTO item in ViewBag.UserHasRoles)
                                     {
-                                        <option selected value="@item.RoleId">@item.RoleTitle</option>
+                                        if (ViewBag.selectedRoleId == item.RoleId)
+                                        {
+                                            <option selected value="@item.RoleId">@item.RoleTitle</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@item.RoleId">@item.RoleTitle</option>
+                                        }
                                     }
-                                    else
-                                    {
-                                        <option value="@item.RoleId">@item.RoleTitle</option>
-                                    }
-                                }
-                            </select>
+                                </select>
+                            </form>
                         </div>
 
                         @*<h4 class="page-title " style="float:left">
