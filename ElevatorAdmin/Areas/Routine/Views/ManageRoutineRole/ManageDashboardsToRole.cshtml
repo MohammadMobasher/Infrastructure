@@ -1,0 +1,147 @@
+﻿@using DataLayer.DTO.Routin2RoleDTO
+@using DataLayer.Entities.Users
+@using DataLayer.DTO.Routine2RoleDashboard
+
+
+@model List<Routin2RoleFullDetailDTO>
+@{
+    ViewData["Title"] = "ثبت کارتابل برای نقش";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Routines = Model.DistinctBy(x => x.RoutineId);
+    Roles Role = ViewBag.Role;
+    List<Routine2RoleDashboardDTO> selectedDashboards = ViewBag.DashboardForRole;
+
+}
+
+
+<style>
+    ul {
+        list-style-type: none;
+    }
+</style>
+
+<form asp-action="" method="post">
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
+        <div class="container">
+            <div class="form-group clearfix">
+                <label class="control-label col-md-2">عنوان نقش <i class="text-danger fa fa-star size-8"></i></label>
+                <div class="col-md-10">
+                    <input type="text" value="@Role.RoleTitle" disabled class="form-control" />
+                </div>
+            </div>
+
+            <div class="card-box" style="background-color:#EEE">
+
+                <div class="row">
+
+                    @{ var raw = 0;}
+                    @foreach (Routin2RoleFullDetailDTO item in Routines)
+                    {
+                        //var currentAccess = listAccess.FirstOrDefault(a => a.Controller.Equals(item.Name));
+                        <input type="hidden" name="vm[@raw].RoleId" value="@Role.Id" />
+                        <div class="col-md-4 col-lg-4 col-xl-12 col-sm-12">
+                            <div class="card-box">
+                                @*<div class="dropdown pull-right">
+                                    <div class="checkbox checkbox-primary" style="top:-10px;padding-left:0 !important">
+                                        <input type="checkbox" class="checkboxHead checkbox-NotValue" data-role="@item.RoutineId">
+
+                                        <label>
+
+                                        </label>
+                                    </div>
+                                </div>*@
+
+                                <h4 class="header-title m-t-0 m-b-30">@(item.Routine.Title)</h4>
+                                <hr class="hr-random" />
+                                <ul>
+
+                                    @foreach (Routin2RoleFullDetailDTO dashboard in Model.Where(x => x.RoutineId == item.RoutineId).ToList())
+                                    {
+                                        <li>
+                                            <div class="checkbox checkbox-info" style="top:-10px;padding-left:0 !important">
+                                                <input type="checkbox" 
+                                                       @(selectedDashboards.Where(x=> x.DashboardEnum == dashboard.DashboardEnum).SingleOrDefault() != null ? "checked='checked'" : "")
+                                                       class="sub_@item.RoutineId checkbox-NotValue" 
+                                                       name="vm[@raw].DashboardEnum" 
+                                                       value="@dashboard.DashboardEnum" 
+                                                       >
+                                                <label>
+                                                    @dashboard.Title
+                                                </label>
+                                            </div>
+                                        </li>
+
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+
+                        raw++;
+                    }
+
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success btn-block">ثبت </button>
+
+
+            <script>
+                $(function () {
+
+
+                    $('hr[class^="hr-random"]').each(function () {
+                        $(this).css('background-color', '#' + Math.floor(Math.random() * 16777215).toString(16));
+                    });
+
+
+
+
+
+                    var checkBoxHead = $('.checkboxHead');
+                    $.each(checkBoxHead, function (index, key) {
+                        var id = $(key).attr("data-role");
+                        var inputs = $('.sub_' + id);
+
+                        var check = $(key).is(":checked");
+
+                        //if (check == false) {
+
+                        //    $.each(inputs, function (index, key) {
+                        //        $(key).attr("disabled", "disabled")
+                        //    })
+
+                        //}
+                        //else {
+
+                        //    $.each(inputs, function (index, key) {
+                        //        $(key).removeAttr("disabled")
+                        //    })
+                        //}
+                    })
+
+                    $('.checkboxHead').on("click", function () {
+                        var id = $(this).attr("data-role");
+                        var inputs = $('.sub_' + id);
+
+                        var check = $(this).is(":checked");
+
+                        if (check == false) {
+
+                            $.each(inputs, function (index, key) {
+                                $(key).attr("disabled", "disabled")
+                            })
+
+                        }
+                        else {
+
+                            $.each(inputs, function (index, key) {
+                                $(key).removeAttr("disabled")
+                            })
+                        }
+                    })
+                })
+            </script>
+        </div>
+    </div>
+</form>

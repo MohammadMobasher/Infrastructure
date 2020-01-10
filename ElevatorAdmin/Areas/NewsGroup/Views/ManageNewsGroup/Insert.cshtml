@@ -1,0 +1,30 @@
+﻿
+
+@{
+    ViewData["Title"] = "ثبت دسته‌بندی جدید";
+    Layout = null;
+}
+
+
+
+
+<form action="/NewsGroup/ManageNewsGroup/Insert" class="form-horizontal" method="post" style="">
+
+    <div class="form-group">
+        <label for="Title" class="control-label col-sm-2">عنوان دسته <i class="text-danger fa fa-star size-8"></i></label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" required="required" name="Title" aria-describedby="Title" placeholder="عنوان دسته" />
+        </div>
+    </div>
+
+    
+
+    <button type="submit" class="btn btn-block btn-success">ثبت</button>
+
+
+</form>
+
+
+
+
+

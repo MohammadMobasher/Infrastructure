@@ -1,0 +1,139 @@
+﻿
+
+@{
+    ViewBag.Title = "روال لغو مجوز قطعی تدریس";
+
+}
+
+<style>
+    .no-aside #header {
+        position: fixed;
+    }
+
+    .content._page-scroll {
+        padding-top: 55px !important;
+    }
+
+    .stats__section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+</style>
+
+<div class="content  animate-panel padding-0">
+
+
+    <div class="row m-t-sm flex-height">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <RoutineDashboards routinId="10000" controller="Test" action="Manage"></RoutineDashboards>
+        </div>
+
+
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 ">
+
+            <div class="panel-body">
+                <div class="stats__section">
+                    <div class="stats-title">
+                        <h4 class="size-16">توضیحات و راهنما</h4>
+                    </div>
+                    <div class="stats-icon">
+                        <i class="pe-7s-shuffle fa-2x text-danger"></i>
+                    </div>
+                </div>
+
+                <div class='margin-top-10'>
+                    <a class="btn btn-block btn-primary" asp-controller="cancellicense" asp-action="List">
+                        امکانات مدیریتی
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 fffff">
+            @*<div data-notice2-routineid="10000" v-cloak>
+                <div class="hpanel hprimary hgeneral hNotif">
+                    <div class="panel-body">
+                        <div class="stats__section">
+                            <div class="stats-title">
+                                <h4 class="size-16 ">صندوق پیام‌های شما </h4>
+                            </div>
+                            <div class="stats-icon label-menu-corner">
+                                <i class="pe-7s-mail fa-2x text-primary"><span class="label label-danger font-fa-sansdn" v-if="newCount">{{ newCount }}</span></i>
+                            </div>
+                        </div>
+
+                        <div class="margin-top-0">
+                            <div class="chat-discussion padding-0 panel-scroll">
+                                <div class="chat-message" v-for="message in messages" v-on:click="markAsRead(message)">
+                                    <div class="message" v-bind:class="{ read: message.IsRead }">
+                                        <div class="message-date ltr"><i class="fa fa-calendar"></i>  {{ message.CreateDateFriendly }} <span v-if="!message.IsRead" class="label label-warning label-new">جدید</span></div>
+                                        <h6 class="message-author" v-html="message.Body"></h6>
+                                        <div class="message-content">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                (function() {
+                    var $elem = $('[data-notice2-routineid]');
+
+                    if (! $elem.length) {
+                        return;
+                    }
+
+                    var routineid = $elem.attr('data-notice2-routineid');
+
+                    var app = new Vue({
+                        el: $elem[0],
+
+                        data: {
+                            messages: [],
+                            newCount: 0
+                        },
+
+                        methods: {
+                            markAsRead: function (message) {
+                                if (message.IsRead) return;
+
+                                var _this = this;
+
+                                $.post('@Url.Action("MarkAsRead", "Notice2")', { id: message.Id }).then(function(response) {
+                                    if (response.Succeed) {
+                                        message.IsRead = true;
+                                        _this.newCount--;
+                                    } else {
+                                        showBeautyMessage(response);
+                                    }
+                                });
+                            }
+                        },
+
+                        created: function() {
+                            var _this = this;
+
+                            var request = $.get('@Url.Action("GetAll", "Notice2")', { routineId: routineid });
+                            request.then(function (response) {
+                                _this.messages = response;
+
+                                for (var i = 0; i < _this.messages.length; i++) {
+                                    if (!_this.messages[i].IsRead) _this.newCount++;
+                                }
+
+                                refreshEqualHeightBox();
+                            });
+                        }
+                    });
+                }());
+            </script>*@
+        </div>
+    </div>
+</div>

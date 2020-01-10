@@ -1,0 +1,55 @@
+﻿@using DataLayer.ViewModels.User
+@using DataLayer.ViewModels.SideBar
+@model List<SidebarViewModel>
+@{ List<UserAccessListViewModel> ListAccess = ViewBag.ListAccess; }
+
+
+@foreach (SidebarViewModel item in Model)
+{
+    @if ((item.Controller == "" && item.Action == "") || ListAccess.Where(x => x.Controller == item.Controller + "Controller" && x.Action == item.Action).SingleOrDefault() != null || ListAccess.Any(a => a.IsAdmin == true))
+    {
+
+        @if (item.Childs == null)
+        {
+            <li>
+                <a asp-area="@item.Area" asp-action="@item.Action" asp-controller="@item.Controller" class="waves-effect sidebarActiveClass">
+                    <i class="@item.Icon"></i>
+                    <span>
+                        @item.Title
+                    </span>
+                </a>
+            </li>
+        }
+        else
+        {
+            <li class="has_sub">
+                <a href="javascript:void(0);" class="waves-effect"><i class="@item.Icon"></i> <span> @item.Title </span> <span class="menu-arrow"></span></a>
+                <ul class="list-unstyled">
+                    @foreach (SidebarChildViewModel child in item.Childs)
+                    {
+                        @if (ListAccess.Where(x => x.Controller == child.Controller + "Controller" && x.Action == child.Action).SingleOrDefault() != null )
+                        {
+                            <li>
+                                <a asp-area="@child.Area" asp-controller="@child.Controller" asp-action="@child.Action">@child.Title</a>
+                            </li>
+                        }
+                    }
+
+                </ul>
+            </li>
+        }
+    }
+}
+
+@*@if (ListAccess.Where(x => x.Controller == ViewBag.Controller + "Controller" && x.Action == ViewBag.Action).SingleOrDefault() != null)
+    {
+        <li>
+            <a asp-action="@ViewBag.Action" asp-controller="@ViewBag.Controller" class="waves-effect sidebarActiveClass">
+                <i class="zmdi @ViewBag.Icon"></i>
+                <span>
+                    @ViewBag.Title
+                </span>
+            </a>
+        </li>
+
+    }*@

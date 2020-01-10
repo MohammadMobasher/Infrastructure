@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\TestArea\**" />
+    <Content Remove="Areas\TestArea\**" />
+    <EmbeddedResource Remove="Areas\TestArea\**" />
+    <None Remove="Areas\TestArea\**" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebFramework\WebFramework.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Plugins\jstree\themes\default\" />
+    <Folder Include="wwwroot\Uploads\UserImage\" />
+    <Folder Include="wwwroot\Uploads\ProductGallery\" />
+    <Folder Include="wwwroot\Uploads\SlideShow\" />
+    <Folder Include="wwwroot\Uploads\Product\" />
+    <Folder Include="wwwroot\Uploads\NewsImages\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="Views\Routine2\GetLogs.cshtml" />
+    <None Include="Views\Shared\_Routine2\_ChangeStep.cshtml" />
+    <None Include="Views\Shared\_Routine2\_CustomAction.cshtml" />
+    <None Include="Views\Shared\_Routine2\_DefaultActions.cshtml" />
+    <None Include="Views\Shared\_Routine2\_LogButton.cshtml" />
+    <None Include="Views\Shared\_RoutineActions2\_Cancel.cshtml" />
+    <None Include="Views\Shared\_RoutineActions2\_Edit.cshtml" />
+    <None Include="Views\Shared\_RoutineActions2\_Next.cshtml" />
+    <None Include="Views\Shared\_RoutineActions2\_Ok.cshtml" />
+    <None Include="wwwroot\Plugins\Groupable-Searchable-Dual-Listbox-Transfer\.gitignore" />
+    <None Include="wwwroot\Plugins\Groupable-Searchable-Dual-Listbox-Transfer\icon_font\font\iconfont.svg" />
+    <None Include="wwwroot\Plugins\Groupable-Searchable-Dual-Listbox-Transfer\js\jquery.transfer.js" />
+    <None Include="wwwroot\Plugins\Groupable-Searchable-Dual-Listbox-Transfer\README.md" />
+    <None Include="wwwroot\UI\pe-icon-7-stroke\fonts-961011\Pe-icon-7-stroke.svg" />
+    <None Include="wwwroot\UI\pe-icon-7-stroke\fonts\Pe-icon-7-stroke.svg" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Update="nlog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>
