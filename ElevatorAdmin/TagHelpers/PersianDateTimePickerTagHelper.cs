@@ -56,11 +56,11 @@ namespace ElevatorAdmin.TagHelpers
 
                 <div class='input-group'>
                     <input type='text' name='" + this.Name + "_' id='" + this.Name + @"_' class='form-control' placeholder='لطفا انتخاب کنید...'
-                        aria-label='IconPersianDateTimePicker' aria-describedby='IconPersianDateTimePicker'
+                        aria-label='IconPersianDateTimePicker"+this.Name+ @"' aria-describedby='IconPersianDateTimePicker" + this.Name + @"'
                         " + (this.Required ? "required='required'" : "") + @" />
                     <input type='hidden' name='" + this.Name + @"' id='" + this.Name + @"' />
                     <div class='input-group-prepend'>
-                        <i class='input-group-text cursor-pointer display-inherit fa fa-calendar' aria-hidden='true' id='IconPersianDateTimePicker'></i>
+                        <i class='input-group-text cursor-pointer display-inherit fa fa-calendar' aria-hidden='true' id='IconPersianDateTimePicker" + this.Name + @"'></i>
                     </div>
                 </div>
 
@@ -84,7 +84,7 @@ namespace ElevatorAdmin.TagHelpers
             string scripts = @"
             <script type='text/javascript'>
                 $(function () {
-                    $('#IconPersianDateTimePicker').MdPersianDateTimePicker({
+                    $('#IconPersianDateTimePicker"+this.Name+@"').MdPersianDateTimePicker({
                         
 	                    targetTextSelector: '#" + this.Name + @"_',
                         targetDateSelector: '#" + this.Name + @"',

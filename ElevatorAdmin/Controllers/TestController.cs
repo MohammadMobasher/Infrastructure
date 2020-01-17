@@ -3,6 +3,7 @@ using DataLayer.DTO.UserRoleDTO;
 using DataLayer.Entities.Users;
 using DataLayer.SSOT.Routine2;
 using DataLayer.SSOT.Routine2.DashBoards;
+using DataLayer.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -44,6 +45,11 @@ namespace ElevatorAdmin.Controllers
             _signInManager = signInManager;
             HasRoutine = true;
         }
+
+
+        
+
+
         [AllowAccess]
         public async Task<IActionResult> Index()
         {
@@ -71,20 +77,7 @@ namespace ElevatorAdmin.Controllers
             await _signInManager.RefreshSignInAsync(user);
             //var ddd = claimsPrincipal.Identities.FirstOrDefault().Claims.Where(x => x.Type == "selectedRoleId").SingleOrDefault();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            
             //_mohammadTestRepository.ddd();
             //var claim = (identity).FindFirst("selectedRoleId");
             //identity.RemoveClaim(claim);
@@ -112,12 +105,23 @@ namespace ElevatorAdmin.Controllers
         [AllowAccess]
         public async Task<IActionResult> ChangeDashboard(int id, Routine2Actions action, string description = "")
         {
-            this.IsPermitted(TestDashBoard.Applicant);
+            await this.IsPermeatedAsync(TestDashBoard.Applicant.ToString());
             var result = await _testRoutinRepository.ChangeStep(UserId, 1, id, action, description);
             return Json(result);
         }
 
 
+
+        public async Task<IActionResult> Manage(testSearchViewModel testSearchViewModel)
+        {
+            var query = await _testRoutinRepository.getQuery();
+            testSearchViewModel.RoutineIsFlown = false;
+            query = query.Where(q => q.RoutineIsFlown == testSearchViewModel.RoutineIsFlown).ToList();
+
+
+            //return await this.BaseManageAsync();
+            return View();
+        }
         //public IActionResult Manage(UpgradeLicenseSearchCriteriaViewModel searchCriteria, UpgradeLicenseDashboard currentDashboard, int page = 1)
         //{
         //    ViewBag.Current = currentDashboard.ToString();

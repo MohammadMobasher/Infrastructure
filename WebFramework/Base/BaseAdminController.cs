@@ -25,6 +25,11 @@ namespace WebFramework.Base
         private readonly UsersAccessRepository _usersAccessRepository;
         private readonly Routine2RoleDashboardRepository _routine2RoleDashboardRepository;
 
+
+        //public delegate void MyDelegate(string text);
+
+        //protected abstract MyDelegate GetStringDelegate(string propertyName);
+
         public BaseAdminController(UsersAccessRepository usersAccessRepository) : base()
         {
             _usersAccessRepository = usersAccessRepository;
@@ -126,6 +131,16 @@ namespace WebFramework.Base
         private int _selectedRoleId { get; set; } = -1;
 
 
+        /// <summary>
+        /// داشبورد فعلی
+        /// این فیلد زمانی پر می‌شود که در صفحه روتین باشد
+        /// </summary>
+        private string CurrentDashboard { get; set; }
+
+        /// <summary>
+        /// شماره روتین مورد نظر
+        /// </summary>
+        public int RoutineId { get; set; }
         #endregion
 
 
@@ -139,14 +154,28 @@ namespace WebFramework.Base
         {
             base.OnActionExecuting(context);
 
+            #region Routin
+
+            if (context.ActionArguments.Keys.Contains("RoutineId"))
+                this.RoutineId = Convert.ToInt32(context.ActionArguments["RoutineId"]);
+
+
+            if (context.ActionArguments.Keys.Contains("CurrentDashboard"))
+                this.CurrentDashboard = context.ActionArguments["CurrentDashboard"].ToString();
+
+
+            #endregion
+
+
 
             this.CurrentPage = Request.Query["currentPage"].Count != 0 ? Convert.ToInt32(Request.Query["currentPage"][0]) : 1;
             this.PageSize = Request.Query["pageSize"].Count != 0 ? Convert.ToInt32(Request.Query["pageSize"][0]) : 10;
+            //this.CurrentDashboard = Request.Query["CurrentDashboard"].Count != 0 ? Request.Query["CurrentDashboard"][0] : string.Empty;
+            //this.RoutineId = Request.Query["RoutineId"].Count != 0 ? Convert.ToInt32(Request.Query["RoutineId"][0]) : -1;
+            
 
         }
-
-
-
+        
         /// <summary>
         /// بعد از هر اکشنی این تابع صدا زده می‌شود
         /// </summary>
@@ -176,11 +205,10 @@ namespace WebFramework.Base
                 // لیست دسترسی‌های کارتابل موجود برای این نقش
                 GetListRoutinAccess();
 
+            ViewBag.CurrentDashboard = this.CurrentDashboard;
+
         }
-
-
-
-
+        
         #region Page AccessLevel
 
         /// <summary>
@@ -210,40 +238,54 @@ namespace WebFramework.Base
 
         #endregion
 
-        
-
-
-
         #region Routin
 
+
         /// <summary>
-        /// آیا کاربر فعلی به این کارتابل دسترسی دارد یا خیر
+        /// آیا این نقش به این کارتابل دسترسی دارد
         /// </summary>
-        /// <typeparam name="TEnum">نوع کارتابل</typeparam>
-        /// <param name="currentDashboard">کارتابل فعلی</param>
+        /// <param name="dashboardName">نام کارتابل</param>
         /// <returns></returns>
-        public bool IsPermitted<TEnum>(TEnum currentDashboard) where TEnum : struct, IConvertible, IComparable, IFormattable
+        public async Task<bool> IsPermeatedAsync(string dashboardName)
         {
-            ///درصورتی که پارامتر پاس داده شده به صورت 
-            /// eunm
-            /// نباشد باید به برنامه نویس یک خطا بدهیم
-            if (!typeof(TEnum).IsEnum)
-            {
-                throw new ArgumentException("TEnum in IsPermitted function must be an enum.");
-            }
-
-
-            //// کارتابل  متقاضی
-            //if (currentDashboard == UpgradeLicenseDashboard.Applicant)
-            //{
-            //    if (!User.HasRole(AuthorityCode.UpgradeLicenseApplicant))
-            //    {
-            //        return false;
-            //    }
-            //}
-
-            return false;
+            return await _routine2RoleDashboardRepository.HasAccessAsync(this.SelectedRoleId, dashboardName);
         }
+
+        public async Task<IActionResult> BaseManageAsync()
+        {
+            if (!await IsPermeatedAsync(this.CurrentDashboard)) return Forbid();
+
+            return View();
+        }
+
+        ///// <summary>
+        ///// آیا کاربر فعلی به این کارتابل دسترسی دارد یا خیر
+        ///// </summary>
+        ///// <typeparam name="TEnum">نوع کارتابل</typeparam>
+        ///// <param name="currentDashboard">کارتابل فعلی</param>
+        ///// <returns></returns>
+        //public bool IsPermitted<TEnum>(TEnum currentDashboard) where TEnum : struct, IConvertible, IComparable, IFormattable
+        //{
+        //    ///درصورتی که پارامتر پاس داده شده به صورت 
+        //    /// eunm
+        //    /// نباشد باید به برنامه نویس یک خطا بدهیم
+        //    if (!typeof(TEnum).IsEnum)
+        //    {
+        //        throw new ArgumentException("TEnum in IsPermitted function must be an enum.");
+        //    }
+
+
+        //    //// کارتابل  متقاضی
+        //    //if (currentDashboard == UpgradeLicenseDashboard.Applicant)
+        //    //{
+        //    //    if (!User.HasRole(AuthorityCode.UpgradeLicenseApplicant))
+        //    //    {
+        //    //        return false;
+        //    //    }
+        //    //}
+
+        //    return false;
+        //}
 
 
 

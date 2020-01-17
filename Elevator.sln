@@ -17,9 +17,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\Data
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ElevatorAdmin", "ElevatorAdmin\ElevatorAdmin.csproj", "{5AFE551F-5CA1-4FD1-B8F8-F88C08586BB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Remark", "Remark\Remark.csproj", "{B02C1A10-984C-46E2-B9EC-80A408A50558}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Remark", "Remark\Remark.csproj", "{B02C1A10-984C-46E2-B9EC-80A408A50558}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regate", "Regate\Regate.csproj", "{6CC28367-6FA2-4BFD-8848-5FE592346EEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Regate", "Regate\Regate.csproj", "{6CC28367-6FA2-4BFD-8848-5FE592346EEA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{E2D1B6B6-1B42-40B3-9065-96A5684DB3BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Initial Queries", "Initial Queries", "{69824DF7-4CBD-4C11-B4B0-22CE90013CE7}"
+	ProjectSection(SolutionItems) = preProject
+		Promotion_Routine.sql = Promotion_Routine.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +77,7 @@ Global
 		{32186853-FDB4-41DB-A806-3F54D898DDFD} = {3492B9DA-72B0-489B-910C-3115CCF5A4AF}
 		{B02C1A10-984C-46E2-B9EC-80A408A50558} = {3492B9DA-72B0-489B-910C-3115CCF5A4AF}
 		{6CC28367-6FA2-4BFD-8848-5FE592346EEA} = {3492B9DA-72B0-489B-910C-3115CCF5A4AF}
+		{69824DF7-4CBD-4C11-B4B0-22CE90013CE7} = {E2D1B6B6-1B42-40B3-9065-96A5684DB3BE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B56B6B36-212C-4E63-A808-6430E09EED8A}

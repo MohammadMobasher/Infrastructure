@@ -1,0 +1,101 @@
+﻿@using DataLayer.DTO.Promotion.BankAnnualPromotion
+@using DNTPersianUtils.Core;
+
+@model List<BankAnnualPromotionDTO>
+@{
+    ViewData["Title"] = "لیست ترفیع‌ها";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 btn-table">
+
+
+
+    <TableBotton area="Promotion" controller="ManageAnnualPromotion" action="Insert"
+                 title="ثبت"
+                 isModal="true"
+                 modalTitle="ثبت دوره ترفیع جدید"
+                 icon="fa-plus"
+                 buttonClass="btn-primary"></TableBotton>
+
+    <span class="hidden" data-role-table-btn-area-access="">
+
+
+        @*<TableBotton area="News" controller="ManageNews" action="Update"
+                         title="ویرایش"
+                         icon="fa-pencil-square-o"
+                         buttonClass="btn-warning"></TableBotton>
+
+
+            <TableBotton area="News" controller="ManageNews" action="Delete"
+                         title="حذف"
+                         icon="fa-trash-o"
+                         buttonClass="btn-danger"></TableBotton>*@
+
+    </span>
+
+</div>
+
+
+<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+
+    <table class="table-first table-condensed table table-responsive tableWrap table-striped rounded table-hover table-bordered ">
+        <thead>
+            <tr>
+                <th width="3%"></th>
+                <th width="60px">ردیف</th>
+                @*<th>توضیحات</th>*@
+                <th>تاریخ شروع</th>
+                <th>تاریخ پایان</th>
+            </tr>
+            <tr>
+                <form method="post">
+                    <th width="3%">---</th>
+                    <th width="60px">---</th>
+                    @*<th width="60px">---</th>*@
+                    <th >---</th>
+                    <th >---</th>
+                    @*<th><input type="text" value="@ViewBag.SearchModel.StartDate" name="Title" class="form-control searchInput" /></th>
+                    <th><input type="text" value="@ViewBag.SearchModel.EndDate" name="SummeryNews" class="form-control searchInput" /></th>*@
+                    <input type="submit" class="hidden searchBtn" value="جستجو" />
+                </form>
+            </tr>
+
+        </thead>
+    </table>
+    <div class="bodycontainer scrollable">
+        <table class="table-second table table-hover table-striped table-condensed table-bordered table-scrollable">
+            <tbody>
+                @{var index = 1;}
+                @if (Model != null && Model.Count != 0)
+                {
+                    @foreach (BankAnnualPromotionDTO item in Model)
+                    {
+                        <tr>
+                            <td><input type="checkbox" data-role-table-checkbox="@item.Id"></td>
+                            <td>@(index++)</td>
+                            @*<td>@Html.Raw((item.Description.Length > 45 ? item.Description.Substring(0, 45) + "..." : item.Description))</td>*@
+                            <td class="direction-ltr">@item.StartDate.ToShortPersianDateString()</td>
+                            <td class="direction-ltr">@item.EndDate.ToShortPersianDateString()</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="text-danger">رکوردی یافت نشد</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <table class="table table-hover table-striped">
+        <tfoot>
+            @Html.Partial("~/Views/Shared/_Pagination.cshtml")
+        </tfoot>
+    </table>
+
+
+
+
+</div>

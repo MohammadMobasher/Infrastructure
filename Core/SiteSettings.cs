@@ -1,5 +1,8 @@
 ﻿namespace Core
 {
+
+    
+
     public class SiteSettings
     {
         public string ElmahPath { get; set; }
@@ -34,4 +37,6 @@
     {
         public string UrlAddress { get; set; }
     }
+
+
 }

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Core;
+using DataLayer.SSOT;
 using ElevatorAdmin.Hubs;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -22,6 +23,7 @@ namespace ElevatorAdmin
     {
         
         private readonly SiteSettings _siteSetting;
+        private readonly FileConfig _fileConfig;
         public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
@@ -29,9 +31,12 @@ namespace ElevatorAdmin
             Configuration = configuration;
 
             _siteSetting = configuration.GetSection(nameof(SiteSettings)).Get<SiteSettings>();
+
         }
 
-        
+       
+
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -44,6 +49,7 @@ namespace ElevatorAdmin
 
             services.AddHttpClient();
 
+            services.Configure<FileConfig>(Configuration.GetSection("FileRepository"));
 
             services.Configure<CookiePolicyOptions>(options =>
             {

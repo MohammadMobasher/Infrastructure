@@ -369,6 +369,308 @@ namespace Service.Migrations
                     b.ToTable("NewsTag");
                 });
 
+            modelBuilder.Entity("DataLayer.Entities.Promotion.ArticlePromotion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("AcceptDate");
+
+                    b.Property<string>("ArticleDOI");
+
+                    b.Property<int?>("ArticleIndex");
+
+                    b.Property<int?>("ArticleLanguage");
+
+                    b.Property<string>("ArticleTitle");
+
+                    b.Property<int?>("ArticleType");
+
+                    b.Property<string>("CertificationFile");
+
+                    b.Property<int?>("ConferenceType");
+
+                    b.Property<string>("FirstPageFile");
+
+                    b.Property<string>("JournalTitle");
+
+                    b.Property<int>("Kind");
+
+                    b.Property<int>("PromotionBasicInfoId");
+
+                    b.Property<float?>("Score");
+
+                    b.Property<int?>("SetPeriod");
+
+                    b.Property<string>("UniversityName");
+
+                    b.Property<byte?>("WriterPosition");
+
+                    b.Property<byte?>("WritersCount");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PromotionBasicInfoId");
+
+                    b.ToTable("ArticlePromotion");
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Promotion.BankAnnualPromotion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.Property<DateTime>("EndDate");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BankAnnualPromotion");
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Promotion.BookPromotion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("BookType");
+
+                    b.Property<DateTime?>("Date");
+
+                    b.Property<string>("Documentation");
+
+                    b.Property<int?>("FestivalType");
+
+                    b.Property<int>("Kind");
+
+                    b.Property<float?>("ParticipationPercentage");
+
+                    b.Property<byte?>("PersonCount");
+
+                    b.Property<byte?>("PersonPosition");
+
+                    b.Property<string>("PlanTitle");
+
+                    b.Property<int>("PromotionBasicInfoId");
+
+                    b.Property<byte?>("Published");
+
+                    b.Property<string>("PublisherTitle");
+
+                    b.Property<int?>("RankEarned");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PromotionBasicInfoId");
+
+                    b.ToTable("BookPromotion");
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Promotion.EducationalActivityPromotion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AcademicYear");
+
+                    b.Property<string>("AssemblyTitle");
+
+                    b.Property<DateTime?>("Date");
+
+                    b.Property<string>("Documentation");
+
+                    b.Property<string>("EventPlace");
+
+                    b.Property<int>("Kind");
+
+                    b.Property<string>("LessonTitle");
+
+                    b.Property<int?>("LessonUnit");
+
+                    b.Property<int?>("PeriodTime");
+
+                    b.Property<int>("PromotionBasicInfoId");
+
+                    b.Property<float?>("Score");
+
+                    b.Property<int?>("Term");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PromotionBasicInfoId");
+
+                    b.ToTable("EducationalActivityPromotion");
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Promotion.PostPromotion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<float?>("ContributionShare");
+
+                    b.Property<int?>("CorporateResponsibilityTime");
+
+                    b.Property<DateTime?>("Date");
+
+                    b.Property<string>("Documentation");
+
+                    b.Property<DateTime?>("EndDate");
+
+                    b.Property<int>("Kind");
+
+                    b.Property<int?>("ParticipationTime");
+
+                    b.Property<int>("PromotionBasicInfoId");
+
+                    b.Property<float?>("Score");
+
+                    b.Property<DateTime?>("StartDate");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PromotionBasicInfoId");
+
+                    b.ToTable("PostPromotion");
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Promotion.ProjectPromotion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("Assistance");
+
+                    b.Property<string>("CooperationCertificate");
+
+                    b.Property<DateTime?>("Date");
+
+                    b.Property<string>("Documentation");
+
+                    b.Property<string>("ExecutiveUnit");
+
+                    b.Property<int?>("JudgmentType");
+
+                    b.Property<int>("Kind");
+
+                    b.Property<string>("PLF02File");
+
+                    b.Property<string>("PLF05Form");
+
+                    b.Property<float?>("ParticipationPercentage");
+
+                    b.Property<int?>("PersonnelCost");
+
+                    b.Property<int>("ProjectCost");
+
+                    b.Property<string>("ProjectExecutiveName");
+
+                    b.Property<string>("ProjectManagerName");
+
+                    b.Property<int>("ProjectPeriod");
+
+                    b.Property<int?>("ProjectType");
+
+                    b.Property<int?>("ProjectTypeOrPlan");
+
+                    b.Property<int>("PromotionBasicInfoId");
+
+                    b.Property<int?>("ReportType");
+
+                    b.Property<float?>("Score");
+
+                    b.Property<float?>("StepWeight");
+
+                    b.Property<string>("Title");
+
+                    b.Property<int?>("Type");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PromotionBasicInfoId");
+
+                    b.ToTable("ProjectPromotion");
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Promotion.Promotion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ParentId");
+
+                    b.Property<float?>("ScorePerCase");
+
+                    b.Property<float?>("ScorePerRow");
+
+                    b.Property<int>("SortOrder");
+
+                    b.Property<string>("Title");
+
+                    b.Property<int>("Type");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Promotion");
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Promotion.PromotionBasicInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateRequest");
+
+                    b.Property<int>("DeservedLastGrade");
+
+                    b.Property<int>("IncentivesLastGrade");
+
+                    b.Property<DateTime?>("RoutineFlownDate");
+
+                    b.Property<bool>("RoutineIsDone");
+
+                    b.Property<bool>("RoutineIsFlown");
+
+                    b.Property<bool>("RoutineIsSucceeded");
+
+                    b.Property<int>("RoutineStep");
+
+                    b.Property<DateTime?>("RoutineStepChangeDate");
+
+                    b.Property<int>("SacrificeLastGrade");
+
+                    b.Property<string>("SentenceFile");
+
+                    b.Property<DateTime>("StartToWork");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("WorkingHoursFile");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PromotionBasicInfo");
+                });
+
             modelBuilder.Entity("DataLayer.Entities.SlideShow", b =>
                 {
                     b.Property<int>("Id")
@@ -611,19 +913,6 @@ namespace Service.Migrations
                     b.ToTable("UsersAccess");
                 });
 
-            modelBuilder.Entity("DataLayer.Entities.mohammadTest", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Title");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("mohammadTest");
-                });
-
             modelBuilder.Entity("DataLayer.Entities.ExireRoutine.Notice2", b =>
                 {
                     b.HasOne("DataLayer.Entities.Users.Users", "CreatorUser")
@@ -725,6 +1014,54 @@ namespace Service.Migrations
                     b.HasOne("DataLayer.Entities.News", "News")
                         .WithMany()
                         .HasForeignKey("NewsId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Promotion.ArticlePromotion", b =>
+                {
+                    b.HasOne("DataLayer.Entities.Promotion.PromotionBasicInfo", "PromotionBasicInfo")
+                        .WithMany()
+                        .HasForeignKey("PromotionBasicInfoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Promotion.BookPromotion", b =>
+                {
+                    b.HasOne("DataLayer.Entities.Promotion.PromotionBasicInfo", "PromotionBasicInfo")
+                        .WithMany()
+                        .HasForeignKey("PromotionBasicInfoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Promotion.EducationalActivityPromotion", b =>
+                {
+                    b.HasOne("DataLayer.Entities.Promotion.PromotionBasicInfo", "PromotionBasicInfo")
+                        .WithMany()
+                        .HasForeignKey("PromotionBasicInfoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Promotion.PostPromotion", b =>
+                {
+                    b.HasOne("DataLayer.Entities.Promotion.PromotionBasicInfo", "PromotionBasicInfo")
+                        .WithMany()
+                        .HasForeignKey("PromotionBasicInfoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Promotion.ProjectPromotion", b =>
+                {
+                    b.HasOne("DataLayer.Entities.Promotion.PromotionBasicInfo", "PromotionBasicInfo")
+                        .WithMany()
+                        .HasForeignKey("PromotionBasicInfoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Promotion.PromotionBasicInfo", b =>
+                {
+                    b.HasOne("DataLayer.Entities.Users.Users", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

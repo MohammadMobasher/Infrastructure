@@ -492,7 +492,7 @@ $(".btn").click(function () {
 // میزنیم تا شماره نقش داخل کوکی عوض شود سپس صفحه رفرش میشود
 $(function () {
 
-    $("select[name='selectedRole']").on('change', function () {
+    $("select[name='selectedRoleId']").on('change', function () {
         var selectedValue = $(this).val();
         var URL = window.location.href;
         console.log("/Account/changeSelectedRole?selectedRoleId=" + selectedValue + "&returnURL='" + URL + "'");

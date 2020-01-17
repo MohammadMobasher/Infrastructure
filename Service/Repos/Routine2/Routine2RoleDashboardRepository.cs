@@ -72,5 +72,38 @@ namespace Service.Repos.Routine2
             return Entities.Where(x => x.RoleId == RoleId).ProjectTo<Routine2RoleDashboardDTO>().ToList();
         }
 
+        /// <summary>
+        /// آیا یک نقش به یک داشبورد دسترسی دارد؟
+        /// </summary>
+        /// <param name="RoleId">شماره نقش</param>
+        /// <param name="Dashboard">نام داشبورد</param>
+        /// <returns></returns>
+        public async Task<bool> HasAccessAsync(int RoleId, string Dashboard)
+        {
+            var result = await Entities.SingleOrDefaultAsync(x => x.RoleId == RoleId && x.DashboardEnum == Dashboard);
+
+            if (result != null)
+                return true;
+
+            return false;
+        }
+
+
+        /// <summary>
+        /// آیا یک نقش به یک داشبورد دسترسی دارد؟
+        /// </summary>
+        /// <param name="RoleId">شماره نقش</param>
+        /// <param name="Dashboard">نام داشبورد</param>
+        /// <returns></returns>
+        public bool HasAccess(int RoleId, string Dashboard)
+        {
+            var result = Entities.SingleOrDefault(x => x.RoleId == RoleId && x.DashboardEnum == Dashboard);
+
+            if (result != null)
+                return true;
+
+            return false;
+        }
+
     }
 }

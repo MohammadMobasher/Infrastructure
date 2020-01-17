@@ -2,7 +2,9 @@
 using DataLayer.Entities;
 using DataLayer.Entities.Common;
 using DataLayer.Entities.ExireRoutine;
+using DataLayer.Entities.Promotion;
 using DataLayer.Entities.Users;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -25,8 +27,19 @@ namespace Service
         #region Tables
 
         public DbSet<TestRoutin> TestRoutin { get; set; }
-        public DbSet<mohammadTest> mohammadTest { get; set; }
-        
+
+        #region Promotion
+        public DbSet<BankAnnualPromotion> BankAnnualPromotion { get; set; }
+        public DbSet<PromotionBasicInfo> PromotionBasicInfo { get; set; }
+        public DbSet<ArticlePromotion> ArticlePromotion { get; set; }
+        public DbSet<BookPromotion> BookPromotion { get; set; }
+        public DbSet<EducationalActivityPromotion> EducationalActivityPromotion { get; set; }
+        public DbSet<PostPromotion> PostPromotion { get; set; }
+        public DbSet<ProjectPromotion> ProjectPromotion { get; set; }
+        public DbSet<Promotion> Promotion { get; set; }
+        #endregion
+
+
         public DbSet<UsersAccess> UsersAccess { get; set; }
 
         #region News

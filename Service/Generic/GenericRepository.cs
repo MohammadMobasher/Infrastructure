@@ -15,6 +15,7 @@ using DataLayer.Interface.Routin2;
 using DataLayer.Entities.ExireRoutine;
 using DataLayer.SSOT.Routine2.DashBoards;
 using DataLayer.Entities.Users;
+using Newtonsoft.Json;
 
 namespace Service
 {
@@ -37,6 +38,53 @@ namespace Service
 
 
         #region Routin
+
+
+        /// <summary>
+        /// کاربر فعلی روی این روتین با این کارتابل روی کدام آیتم‌ها کاری انجام داده است
+        /// </summary>
+        /// <param name="routineId">شماره روتین</param>
+        /// <param name="userId">شماره کاربری</param>
+        /// <param name="dashboardEnum">نام دشبورد</param>
+        /// <returns></returns>
+        public List<int> GetUserEntityIds(int routineId, int userId, string dashboardEnum)
+        {
+            var role = DbContext.Routine2Role
+                .FirstOrDefault(q => q.RoutineId == routineId && q.DashboardEnum == dashboardEnum);
+
+            var model = DbContext.Routine2Log
+                .Where(l => l.RoutineId == routineId &&
+                            l.UserId == userId &&
+                            l.RoutineRoleTitle == role.Title)
+                .Select(l => l.EntityId).ToList();
+
+            return model;
+        }
+
+
+
+
+
+        /// <summary>
+        /// این متد مراحل یک کارتابل را برای روالی خاص برمی‌گرداند
+        /// </summary>
+        /// <param name="routineId">شماره روتین </param>
+        /// <param name="dashboardEnum">نام کارتابل</param>
+        /// <returns></returns>
+        public List<int> GetRoleSteps(int routineId, string dashboardEnum)
+        {
+            var role = DbContext.Routine2Role
+                .FirstOrDefault(q => q.RoutineId == routineId && q.DashboardEnum == dashboardEnum);
+
+            if (role == null)
+                throw new Exception($"داشبوردی با عنوان {dashboardEnum} در روال {routineId} یافت نشد");
+
+            return JsonConvert.DeserializeObject<List<int>>(role.StepsJson);
+        }
+
+
+
+
 
 
         /// <summary>
