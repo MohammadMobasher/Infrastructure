@@ -1,7 +1,8 @@
 ﻿@using Regate
 @using DataLayer.SSOT
+@using Microsoft.Extensions.Options;
 
-@inject FileConfig fileConfig
+@inject IOptions<FileConfig> fileConfig
 
 @{
     ViewData["Title"] = "Insert";
@@ -45,7 +46,7 @@
             @Html.Raw(RegateJson.Build(
              name: "SentenceFile",
              hasFile:true,
-             repositoryWebAddress:fileConfig.WebAddress
+             repositoryWebAddress:fileConfig.Value.WebAddress
             ))
 
             @*@Html.Raw(RegateFile.Build("SentenceFile", isRequired: true))*@
